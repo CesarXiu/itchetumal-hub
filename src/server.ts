@@ -1,6 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import { connectDB, client } from "./db";
+import pagesRoutes from "./routes/pages";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,6 +15,9 @@ connectDB().then(() => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
   });
 });
+
+// RUTAS
+app.use("/pages", pagesRoutes);
 
 // Manejo de cierre del servidor
 process.on("SIGINT", async () => {
