@@ -1,0 +1,34 @@
+{
+  "name": "hub-server",
+  "version": "1.0.0",
+  "description": "Hub Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node src/server.ts",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "CesarXiu",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.14.2"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CesarXiu/itchetumal-hub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CesarXiu/itchetumal-hub/issues"
+  },
+  "homepage": "https://github.com/CesarXiu/itchetumal-hub#readme"
+}
