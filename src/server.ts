@@ -2,6 +2,8 @@ import express from "express";
 import "dotenv/config";
 import { connectDB, client } from "./db";
 import pagesRoutes from "./routes/pages";
+import authRoutes from "./routes/auth";
+import {authMiddleware} from "@/middleware/authMiddleware";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,8 +18,13 @@ connectDB().then(() => {
   });
 });
 
+//MIDDLEWARES
+//app.use(authMiddleware);
+
 // RUTAS
-app.use("/pages", pagesRoutes);
+app.use("/pages", authMiddleware, pagesRoutes);
+app.use("/api/auth", authRoutes);
+
 
 // Manejo de cierre del servidor
 process.on("SIGINT", async () => {

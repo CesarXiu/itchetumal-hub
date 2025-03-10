@@ -11,5 +11,8 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   res.json(await PageController.store(req.body));
 });
+router.put("/:id", async (req, res) => {
+  res.json(await PageController.update(req.body));
+});
 
 export default router;

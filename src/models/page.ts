@@ -16,9 +16,23 @@ class PageModel {
   }
   static async find(id: string): Promise<Page | null> {
     const db = await connectDB();
-    let query = {_id: new ObjectId(id)};
-    let result = await db.collection(this.collectionName).findOne(query);
+    const query = {_id: new ObjectId(id)};
+    const result = await db.collection(this.collectionName).findOne(query);
     return result as Page | null;
+  }
+  static async update(data: Page): Promise<Page> {
+    const db = await connectDB();
+    const query = {_id: new ObjectId(data._id)};
+    await db.collection(this.collectionName).updateOne(query, {$set: 
+      {
+        nombre: data.nombre,
+        descripcion: data.descripcion,
+        url: data.url,
+        type: data.type,
+        icono: data.icono
+      }
+    });
+    return data;
   }
 }
 

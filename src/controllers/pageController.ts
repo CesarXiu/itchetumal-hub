@@ -11,6 +11,9 @@ class PageController {
   static async show(id: string): Promise<PageInterface | null> {
     return await Page.find(id);
   }
+  static async update(data: PageInterface): Promise<PageInterface> {
+    return await Page.update(data);
+  }
 }
 
 export default PageController;
