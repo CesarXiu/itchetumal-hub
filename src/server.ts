@@ -3,6 +3,7 @@ import "dotenv/config";
 import { connectDB, client } from "./db";
 import pagesRoutes from "./routes/pages";
 import authRoutes from "./routes/auth";
+import userRoutes from "./routes/user";
 import {authMiddleware} from "@/middleware/authMiddleware";
 
 const app = express();
@@ -22,7 +23,8 @@ connectDB().then(() => {
 //app.use(authMiddleware);
 
 // RUTAS
-app.use("/pages", authMiddleware, pagesRoutes);
+app.use("/api/users", authMiddleware, userRoutes);
+app.use("/api/pages", pagesRoutes);
 app.use("/api/auth", authRoutes);
 
 
