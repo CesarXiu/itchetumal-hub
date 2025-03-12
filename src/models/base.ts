@@ -19,6 +19,11 @@ export default abstract class BaseModel<T> {
         const result = await db.collection(this.collectionName).findOne(query);
         return result as T | null;
     }
+    static async findOne<T>(query: any): Promise<T | null> {
+        const db = await connectDB();
+        const result = await db.collection(this.collectionName).findOne(query);
+        return result as T | null;
+    }
     static async update<T extends BaseModelInterface>(data: Partial<T> & { _id: string }): Promise<T> {
         const db = await connectDB();
         const query = { _id: new ObjectId(data._id) };
