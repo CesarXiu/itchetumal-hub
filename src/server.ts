@@ -5,6 +5,7 @@ import { connectDB, client } from "./db";
 import pagesRoutes from "./routes/pages";
 import authRoutes from "./routes/auth";
 import userRoutes from "./routes/user";
+import iconRoutes from "./routes/icon";
 import {authMiddleware} from "@/middleware/authMiddleware";
 
 const app = express();
@@ -24,8 +25,11 @@ connectDB().then(() => {
 
 // RUTAS
 app.use("/api/users", authMiddleware, userRoutes);
+app.use("/api/icons", authMiddleware, iconRoutes);
 app.use("/api/pages", pagesRoutes);
 app.use("/api/auth", authRoutes);
+
+
 
 
 // Manejo de cierre del servidor
