@@ -1,11 +1,10 @@
 import { minioClient } from '@/minio';
 import Stream from 'stream';
 import { v4 as uuidv4 } from 'uuid';
-import { object } from 'zod';
 
 export default class Icons {
     private static BUCKET = 'icons';
-    static async create(file: Buffer, name: string): Promise<Boolean> {
+    static async create(file: Buffer, name: string): Promise<String | null> {
         if(await Icons.exists() && file) {
             const extension = name.split('.').pop();
             const uniqueFileName = `${uuidv4()}.${extension}`;
@@ -17,14 +16,13 @@ export default class Icons {
             });
         } catch (e) {
             console.error('Error uploading file', e);
-            return false;
+            return null;
+        } finally {
+            return uniqueFileName;
         }
-
-        return true;
-
         }else{
             console.error('Bucket does not exist');
-            return false;
+            return null;
         }
     }
     static async find(objNameValue: string): Promise< Stream.Readable | null> {

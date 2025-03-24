@@ -97,7 +97,7 @@ router.post('/upload', express.raw({ type: 'image/*', limit: '10mb' }), async (r
 
         const result = await iconController.store(file, name);
         if(result){
-            res.send('File uploaded');
+            res.json({ fileName: name });
         }else{
             res.status(500).send('Error uploading file');
         }
