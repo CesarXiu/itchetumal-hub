@@ -5,6 +5,12 @@ export default class iconController{
         return await Icon.create(file, name);
     }
     static async show(objNameValue: string): Promise<Stream.Readable | null> {
-        return await Icon.find(objNameValue);
+        const obj = await Icon.find(objNameValue);
+        if(obj){
+            console.log('si hay');
+            return obj;
+        }else{
+            return null;
+        }
     }
 }

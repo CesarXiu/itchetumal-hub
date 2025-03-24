@@ -1,6 +1,7 @@
 import { minioClient } from '@/minio';
 import Stream from 'stream';
 import { v4 as uuidv4 } from 'uuid';
+import { object } from 'zod';
 
 export default class Icons {
     private static BUCKET = 'icons';
@@ -34,10 +35,12 @@ export default class Icons {
             console.error('Error downloading file', e);
             return null;
         }finally{
-            console.log(typeof dataStream);
+            //console.log(typeof dataStream);
+            console.log(objNameValue);
             return dataStream;
         }
     }
+
     private static exists = async (): Promise<boolean> => await minioClient.bucketExists(Icons.BUCKET);
     private static getContentType = (filename:String) => {
         if (filename.endsWith('.jpg') || filename.endsWith('.jpeg')) return 'image/jpeg';
