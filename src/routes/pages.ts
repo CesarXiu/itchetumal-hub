@@ -14,7 +14,11 @@ router.post("/", authMiddleware, pageFormatMiddleware, async (req, res) => {
   res.json(await PageController.store(req.body));
 });
 router.put("/:id", authMiddleware, pageFormatMiddleware, async (req, res) => {
-  res.json(await PageController.update(req.body));
+  try{
+    res.json(await PageController.update(req.body, req.params.id));
+  }catch(e){
+    res.json({error: "No se encontró el documento para actualizar."});
+  }
 });
 
 export default router;

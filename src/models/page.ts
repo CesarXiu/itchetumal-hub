@@ -20,19 +20,24 @@ class PageModel {
     const result = await db.collection(this.collectionName).findOne(query);
     return result as Page | null;
   }
-  static async update(data: Page): Promise<Page> {
+  static async update(data: Page, id: string): Promise<Page> {
     const db = await connectDB();
-    const query = {_id: new ObjectId(data._id)};
-    await db.collection(this.collectionName).updateOne(query, {$set: 
-      {
+    const query = {_id: new ObjectId(id)};
+    console.log(query);
+    const result = await db.collection(this.collectionName).updateOne(query, {
+      $set: {
         nombre: data.nombre,
         descripcion: data.descripcion,
         url: data.url,
         type: data.type,
-        icono: data.icono
-      }
+        icono: data.icono,
+      },
     });
-    return data;
+    if (result.matchedCount === 0) {
+      throw new Error("No se encontró el documento para actualizar.");
+    }else{
+      return data;
+    }
   }
 }
 
